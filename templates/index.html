@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>AI-Powered Resume Parser</title>
+</head>
+<body>
+    <h1>AI-Powered Resume Parser</h1>
+
+    <!-- Form for uploading resumes or parsing from database -->
+    <form action="/parse" method="post" enctype="multipart/form-data">
+        <label for="resume-option">Select an option:</label><br>
+        <input type="radio" name="option" value="upload" id="upload-option" required>
+        <label for="upload-option">Upload your resume (PDF)</label><br>
+        <input type="radio" name="option" value="database" id="database-option">
+        <label for="database-option">Parse resumes from the database</label><br><br>
+
+        <div id="upload-section" style="display: none;">
+            <label for="resume">Upload your resume (PDF):</label>
+            <input type="file" name="resume" id="resume" accept=".pdf">
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // Show/hide the upload section based on selected option
+        document.querySelectorAll('input[name="option"]').forEach((elem) => {
+            elem.addEventListener('change', function(event) {
+                const uploadSection = document.getElementById('upload-section');
+                if (event.target.value === 'upload') {
+                    uploadSection.style.display = 'block';
+                } else {
+                    uploadSection.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+    {% if results %}
+        <h2>Parsed Results</h2>
+        
+        <!-- Search Filter -->
+        <form id="searchForm" method="GET" action="{{ url_for('search') }}">
+            <input type="text" name="query" placeholder="Search by Job Title, Skills, Education..." required>
+            <button type="submit">Search</button>
+        </form>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Filename</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Job Title</th>
+                    <th>Skills</th>
+                    <th>Education</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                    <tr>
+                        <td>{{ result.filename }}</td>
+                        <td>{{ result.name }}</td>
+                        <td>{{ result.email }}</td>
+                        <td>{{ result.phone }}</td>
+                        <td>{{ result.job_title }}</td>
+                        <td>{{ result.skills }}</td>
+                        <td>{{ result.education }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3>Download Options</h3>
+        <a href="/download/csv" class="btn btn-primary">Download as CSV</a>
+        <a href="/download/json" class="btn btn-primary">Download as JSON</a>
+    {% endif %}
+</body>
+</html>

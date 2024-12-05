@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Parsed Resume Results</title>
+</head>
+<body>
+    <h1>Parsed Resume Results</h1>
+
+    <table class="resume-results-table">
+        <thead>
+            <tr>
+                <th>Filename</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Skills</th>
+                <th>Education</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td>{{ result.filename }}</td>
+                <td>{{ result.name }}</td>
+                <td>{{ result.email }}</td>
+                <td>{{ result.phone }}</td>
+                <td>{{ result.skills }}</td>
+                <td>{{ result.education }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
