@@ -27,8 +27,8 @@ This project is a web-based AI-powered resume parser designed to streamline the 
 - Install the virtual environment and dependencies
 - Train the model and run the flask Application
 
-### <img width="371" alt="image" src="https://github.com/user-attachments/assets/a6e3bb6c-f461-40cc-8526-b287bb9faa75">
+### <img width="571" alt="image" src="https://github.com/user-attachments/assets/a6e3bb6c-f461-40cc-8526-b287bb9faa75">
 
-### <img width="327" alt="image" src="https://github.com/user-attachments/assets/80712935-39f1-466a-9d67-781aeed07395">
+### <img width="571" alt="image" src="https://github.com/user-attachments/assets/80712935-39f1-466a-9d67-781aeed07395">
 
 
